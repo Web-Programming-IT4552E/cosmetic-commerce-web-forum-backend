@@ -9,6 +9,7 @@ import { PostType } from './enums/post-type.enum';
 import { PostRepository } from './post.repository';
 import { GetListPublicPostQueryDto } from './enums/getListPublicPostQuery.dto';
 import { GetListPersonalPostQueryDto } from './enums/getPersonalPostQuery.dto';
+import { Post } from './schemas/post.schema';
 
 @Injectable()
 export class PostService {
@@ -78,7 +79,7 @@ export class PostService {
     };
   }
 
-  async getPublicPostDetail(post_id: string) {
+  async getPublicPostDetail(post_id: string): Promise<Post> {
     const query = {
       _id: post_id,
       status: { $in: [PostStatus.ACTIVE, PostStatus.LOCKED] },

@@ -14,6 +14,7 @@ import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { ReactionModule } from './reaction/reaction.module';
 import { QueueModule } from './queue/queue.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { QueueModule } from './queue/queue.module';
     CommonModule,
     PostModule,
     ReactionModule,
+    CommentModule,
   ],
   providers: [
     {

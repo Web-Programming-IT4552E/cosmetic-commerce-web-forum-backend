@@ -1,11 +1,12 @@
 import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { JwtDecodedData, Roles } from 'src/common/decorators/auth.decorator';
 import { UserType } from 'src/user/enums/user-type.enum';
-import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtPayload } from 'src/auth/dtos/jwt-payload.dto';
 import { ReactionService } from './reaction.service';
 import { GetListReactionUserQueryDto } from './constants/getListReactionUserQuery.dto';
 
+@ApiTags('reaction')
 @Controller('/reaction')
 export class ReactionController {
   constructor(private readonly reactionService: ReactionService) {}
