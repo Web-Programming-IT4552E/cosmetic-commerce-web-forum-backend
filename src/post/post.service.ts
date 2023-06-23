@@ -201,4 +201,8 @@ export class PostService {
     const updateOptions = { status: new_status };
     return this.postRepository.updatePost(query, updateOptions);
   }
+
+  async findAPostUpdate(query: any, UpdateQuery: any) {
+    return this.postRepository.updatePost(query, UpdateQuery);
+  }
 }

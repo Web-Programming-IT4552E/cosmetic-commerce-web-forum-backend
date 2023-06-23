@@ -12,6 +12,8 @@ import { RoleGuard } from './common/guards/roles.guard';
 import { CustomerModule } from './customer/customer.module';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
+import { ReactionModule } from './post-reaction/reaction.module';
+import { QueueModule } from './queue/queue.module';
 
 @Module({
   imports: [
@@ -21,11 +23,13 @@ import { PostModule } from './post/post.module';
     DatabaseModule,
     UserModule,
     AdminModule,
+    QueueModule,
     RedisCacheModule,
     AuthModule,
     CustomerModule,
     CommonModule,
     PostModule,
+    ReactionModule,
   ],
   providers: [
     {
