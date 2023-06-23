@@ -20,6 +20,7 @@ import { UpdatePostDto } from './dtos/updatePost.dto';
 import { UpdatePostStatusDto } from './dtos/updatePostStatus.dto';
 import { PostService } from './post.service';
 import { GetListPublicPostQueryDto } from './enums/getListPublicPostQuery.dto';
+import { GetListPersonalPostQueryDto } from './enums/getPersonalPostQuery.dto';
 
 @Controller('/post')
 export class PostController {
@@ -61,15 +62,13 @@ export class PostController {
   @ApiBearerAuth()
   @Roles([UserType.ADMIN, UserType.CUSTOMER])
   async getMyPosts(
-    @Query('page')
-    page: number,
-    @Query('limit')
-    limit: number,
-    @Query('status')
-    status: string,
+    @Query() getPersonalPublicPostQueryDto: GetListPersonalPostQueryDto,
     @JwtDecodedData() jwtPayload: JwtPayload,
   ) {
-    return this.postService.getMyPosts(jwtPayload.userId, page, limit, status);
+    return this.postService.getMyPosts(
+      jwtPayload.userId,
+      getPersonalPublicPostQueryDto,
+    );
   }
 
   @Get('/myPost/:post_id')
