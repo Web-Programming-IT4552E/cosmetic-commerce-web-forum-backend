@@ -12,7 +12,7 @@ import { RoleGuard } from './common/guards/roles.guard';
 import { CustomerModule } from './customer/customer.module';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
-import { ReactionModule } from './post-reaction/reaction.module';
+import { ReactionModule } from './reaction/reaction.module';
 import { QueueModule } from './queue/queue.module';
 
 @Module({
