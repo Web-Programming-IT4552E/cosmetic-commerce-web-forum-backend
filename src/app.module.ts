@@ -11,6 +11,7 @@ import { CommonModule } from './common/common.module';
 import { RoleGuard } from './common/guards/roles.guard';
 import { CustomerModule } from './customer/customer.module';
 import { UserModule } from './user/user.module';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     CustomerModule,
     CommonModule,
+    PostModule,
   ],
   providers: [
     {
