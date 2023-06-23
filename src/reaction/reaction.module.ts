@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { BullModule } from '@nestjs/bull';
 import { ConfigService } from '@nestjs/config';
 import { PostModule } from 'src/post/post.module';
+import { CommentModule } from 'src/comment/comment.module';
 import { ReactionService } from './reaction.service';
 import { ReactionController } from './reaction.controller';
 import { ReactionRepository } from './reaction.repository';
@@ -21,7 +22,8 @@ import { ReactionProcessor } from './reaction.queue.processor';
       }),
       inject: [ConfigService],
     }),
-    PostModule,
+    forwardRef(() => PostModule),
+    forwardRef(() => CommentModule),
   ],
   providers: [
     ReactionProcessor,

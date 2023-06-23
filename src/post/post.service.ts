@@ -1,6 +1,8 @@
+/* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { JwtPayload } from 'src/auth/dtos/jwt-payload.dto';
 import { Injectable } from '@nestjs/common';
+import { ReactionService } from 'src/reaction/reaction.service';
 import { CreateAnnouncementPostDto } from './dtos/createAnnouncementPost.dtos';
 import { CreateRegularPostDto } from './dtos/createRegularPost.dto';
 import { UpdatePostDto } from './dtos/updatePost.dto';
@@ -13,7 +15,10 @@ import { Post } from './schemas/post.schema';
 
 @Injectable()
 export class PostService {
-  constructor(private readonly postRepository: PostRepository) {}
+  constructor(
+    private readonly postRepository: PostRepository,
+    private readonly reactionService: ReactionService,
+  ) {}
 
   async getPublicPost(
     getListPublicPostQueryDto: GetListPublicPostQueryDto,
@@ -57,18 +62,20 @@ export class PostService {
       populateOptions,
       sort_by,
     );
-    // for (const x of data) {
-    //   if (
-    //     await ReactionModel.findOne({
-    //       reacted_object_id: x._id,
-    //       user_id: user._id,
-    //     })
-    //   )
-    //     Object.assign(x, { is_reacted: true });
-    //   else {
-    //     Object.assign(x, { is_reacted: false });
-    //   }
-    // }
+
+    for (const x of data) {
+      if (
+        await this.reactionService.findReactionDocument({
+          reacted_object_id: x._id,
+          user_id: user.userId,
+        })
+      )
+        Object.assign(x, { is_reacted: true });
+      else {
+        Object.assign(x, { is_reacted: false });
+      }
+    }
+
     return {
       paginationInfo: {
         page,

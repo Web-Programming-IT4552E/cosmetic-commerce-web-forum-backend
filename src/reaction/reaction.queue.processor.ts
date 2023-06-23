@@ -9,6 +9,8 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { Job } from 'bull';
 import { PostService } from 'src/post/post.service';
 import { PostStatus } from 'src/post/enums/post-status.enum';
+import { CommentService } from 'src/comment/comment.service';
+import { CommentStatus } from 'src/comment/enums/comment-status.enum';
 import {
   POST_REACTION_QUEUE,
   REACTION_TO_POST,
@@ -23,6 +25,7 @@ export class ReactionProcessor {
   constructor(
     private readonly reactionService: ReactionService,
     private readonly postService: PostService,
+    private readonly commentService: CommentService,
   ) {}
 
   @OnQueueActive()
@@ -67,10 +70,10 @@ export class ReactionProcessor {
           },
           { $inc: { number_of_like: -1 } },
         );
-        // await CommentModel.findOneAndUpdate(
-        //   { _id: reacted_object_id, status: CommentStatus.ACTIVE },
-        //   { $inc: { number_of_like: -1 } },
-        // );
+        await this.commentService.findACommentAndUpdate(
+          { _id: reacted_object_id, status: CommentStatus.ACTIVE },
+          { $inc: { number_of_like: -1 } },
+        );
       } else {
         if (
           !(await this.postService.findAPostUpdate(
@@ -79,12 +82,11 @@ export class ReactionProcessor {
               status: { $in: [PostStatus.ACTIVE, PostStatus.LOCKED] },
             },
             { $inc: { number_of_like: 1 } },
+          )) &&
+          !(await this.commentService.findACommentAndUpdate(
+            { _id: reacted_object_id, status: CommentStatus.ACTIVE },
+            { $inc: { number_of_like: 1 } },
           ))
-          //  &&
-          // !(await CommentModel.findOneAndUpdate(
-          //   { _id: reacted_object_id, status: CommentStatus.ACTIVE },
-          //   { $inc: { number_of_like: 1 } },
-          // ))
         )
           throw new BadRequestException('Cannot reaction this post !');
         await this.reactionService.createReaction(user_id, reacted_object_id);

@@ -40,4 +40,8 @@ export class ReactionRepository {
       reacted_object_id,
     });
   }
+
+  async findOneReactionDocument(query: FilterQuery<Reaction>) {
+    return this.reactionModel.findOne(query).lean();
+  }
 }

@@ -135,4 +135,8 @@ export class CommentService {
       );
     return deletedComment;
   }
+
+  async findACommentAndUpdate(query: any, updateOptions: any) {
+    return this.commentRepository.updateComment(query, updateOptions);
+  }
 }

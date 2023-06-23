@@ -64,4 +64,8 @@ export class ReactionService {
   async deleteReaction(query: any) {
     return this.reactionRepository.findReactionAndDelete(query);
   }
+
+  async findReactionDocument(query: any) {
+    return this.reactionRepository.findOneReactionDocument(query);
+  }
 }
