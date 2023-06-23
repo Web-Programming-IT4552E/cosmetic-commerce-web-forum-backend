@@ -9,8 +9,8 @@ import { PostType } from '../enums/post-type.enum';
   options: { allowMixed: 0 },
   schemaOptions: {
     timestamps: {
-      createdAt: 'create_time',
-      updatedAt: 'update_time',
+      createdAt: 'created_time',
+      updatedAt: 'updated_time',
     },
   },
 })
