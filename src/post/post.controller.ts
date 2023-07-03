@@ -191,6 +191,7 @@ export class PostController {
     };
   }
 
+  @ApiBearerAuth()
   @Patch('/review/:post_id')
   @Roles([UserType.ADMIN])
   @ApiOperation({
