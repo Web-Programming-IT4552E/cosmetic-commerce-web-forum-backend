@@ -1,4 +1,4 @@
-# [Admin-Site-Backend] Cosmetics Shop
+# [Forum-Site-Backend] Cosmetics Shop
 
 
 <p align="center">
@@ -6,7 +6,7 @@
 </p>
 
 ## Description
-Admin Site API Endpoints for cosmetic selling websites
+Forum Site API Endpoints for cosmetic selling websites
 
 ## Technologies
 - **[NestJS](https://nestjs.com/)** : A progressive Node.js framework for building efficient, reliable and scalable server-side applications
