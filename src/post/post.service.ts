@@ -30,7 +30,7 @@ export class PostService {
     const query = {};
 
     const selectQuery = {};
-    const sort_by = '-create_time';
+    const sort_by = '-created_time';
     if (category) {
       Object.assign(query, { category: { $in: category.split(',') } });
     }
@@ -104,7 +104,7 @@ export class PostService {
     const { page, limit, status } = { ...getListPersonalPostQueryDto };
     const query = { user_id, status: { $not: { $eq: PostStatus.DELETED } } };
     const selectQuery = {};
-    const sort_by = '-create_time';
+    const sort_by = '-created_time';
     if (status) {
       Object.assign(query, {
         status: {

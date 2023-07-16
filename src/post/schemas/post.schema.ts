@@ -38,7 +38,4 @@ export class Post {
 
   @prop({ required: false, default: 0 })
   number_of_comment: number;
-
-  @prop({})
-  create_time: Date;
 }

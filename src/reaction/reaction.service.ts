@@ -31,7 +31,7 @@ export class ReactionService {
       });
     }
     const selectQuery = {};
-    const sort_by = 'create_time';
+    const sort_by = '-created_time';
     const populateOptions = [
       { path: 'user_id', select: '_id fullname avatar' },
     ];
