@@ -33,7 +33,7 @@ export class PostRepository {
     query: FilterQuery<Post>,
     populateOptions: any[],
   ): Promise<Post> {
-    return this.postModel.find(query).populate(populateOptions).lean();
+    return this.postModel.findOne(query).populate(populateOptions).lean();
   }
 
   async getNumberOfPostWithFilter(query: FilterQuery<Post>) {
